@@ -4,7 +4,6 @@ import TelaEditarUsuario from '../components/screens/TelaEditarUsuario.vue'
 import TelaPerfil from '../components/screens/TelaPerfil.vue'
 import Cadastro from '../components/screens/TelaCadastroUsuario.vue'
 import Pokemons from '../components/screens/Pokemons.vue'
-import Clima from '../components/screens/Clima.vue'
 import store from  '@/store'
 
 const routes = [
@@ -47,15 +46,7 @@ const routes = [
     meta: {
       public: false
     }
-  },
-  {
-    path: '/clima',
-    name: 'Clima',
-    component: Clima,
-    meta: {
-      public: true
-    }
-  },
+  }
 ]
   
 const router = createRouter({
