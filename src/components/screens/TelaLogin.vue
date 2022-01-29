@@ -1,26 +1,24 @@
 <template>
-    <div id="posicao">
-        <div class="img-login" id="div-img-login">
-            <img src="../../assets/images/image-side-login.jpg" alt="trabalho-em-equipe" id="img-login">
-        </div>
-        
-        <!-- Esse form era anteriormente uma div -->
-        <form @submit.prevent="login" class="container">
-            <img src="../../assets/images/logo.svg" alt="soluti-logo" id="soluti-login">
-            <h1>Login</h1>  
-            <div class="form-login">
-                <label for="email"><strong>Email</strong></label>
-                <input v-model="usuario.email" type="text" name="username" placeholder="Digite seu email"/>
-                <label for="senha"><strong>Senha</strong></label>
-                <input v-model="usuario.senha" type="password" name="password" placeholder="Digite sua senha" />
-            </div>
-                <button type="submit">Login</button>
-            <div class="checkbox-row">
-                <label><input type="checkbox" checked="checked" name="lembrar" />Lembrar</label>
-                <span class="password"><a href="#"> Esqueceu a senha?</a></span>
-            </div>
-        </form>
+   <div class="container">
+    <div class="widget">
+      <img id="login" src="@/assets/images/Login.svg" alt="Login">
+
+      <form @submit.prevent="login" class="formulario">
+        <label>E-mail</label>
+        <input v-model="usuario.email" type="email">
+        <label>Senha</label>
+        <input v-model="usuario.senha" type="password">
+
+        <button type="submit" >Login</button>
+      </form>
+
+      <span> <span>Não tem uma conta?</span> <br> Faça seu cadatro: <router-link to="/cadastro"><a>Cadstrar</a></router-link></span>
+
+      <img id="PokeBall" src="@/assets/images/PokeBall.svg" alt="PokeBall">
+      <img id="MegaBall" src="@/assets/images/MegaBall.svg" alt="MegaBall">
+      <img id="UltraBall" src="@/assets/images/UltraBall.svg" alt="UltraBall">
     </div>
+  </div>
 </template>
 
 <script>
@@ -53,83 +51,132 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-    /* display: flex; */
-    font-size: 15px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-#posicao {
-  display: grid; 
-  grid-template-columns: 0.8fr 0.3fr 0fr; 
-  grid-template-rows: 1fr 1fr 0fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "img-login container ."
-    "img-login container ."
-    ". . ."; 
-}
-
-input[type=text], input[type=password] {
-    border-radius: 15px;
-    width: 100%;
-    padding: 8px 8px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
     color: black;
 }
 
-#soluti-login {
-    width: 30%;
-    margin-left: 36%;
-}
-
-h1 {
-    text-align: center;
-    font-size: 18px;
-    padding: 10%;
-}
-
-span.password a{ 
-    color: #2BF14D !important;
-    float: right;
-}
-
-button {
-    border-radius: 25px;
-    background-color: #2BF14D;
-    color: #fff;
-    padding: 14px 0;
-    margin-top: 3%;
-    margin-bottom: 4%;
-    margin-left: 25%;
-    border: none;
-    cursor: pointer;
-    width: 50%;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-#div-img-login {
-    grid-area: img-login; 
-}
-
-#img-login {
-    width: 100%;
-    height: 100%;
-}
-
 .container {
-    grid-area: container;
-    padding: 16px;
-    color: #2BF14D;
-    border: 5px solid #13564F;
-    background-color: #13564F;
-    /* border-radius: 25px; */
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+.widget {
+    position: relative;
+
+    margin-top: 25px;
+    width: 538.49px;
+    height: 604px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    background: #FFFFFF;
+    box-shadow: 2px 4px 20px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+}
+
+.widget #login{
+    margin-top: 50px;
+
+    width: 300px;
+    height: auto;
+}
+
+.widget > span {
+    margin-top: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.widget > span > span {
+    font-weight: 400;
+}
+
+.widget span a {
+    text-decoration: none;
+}
+
+.widget .formulario {
+    margin-top: 50px  ;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget .formulario label {
+    margin-left: 12px;
+
+    align-self: flex-start;
+
+    font-size: 18px;
+    line-height: 27px;
+}
+
+
+.widget .formulario input{
+    padding: 10px;
+
+    width: 248px;
+    height: 40px;
+
+    border: 0.5px solid #000000;
+    box-sizing: border-box;
+    border-radius: 30px;
+
+    font-weight: 400;
+}
+
+.widget .formulario button {
+    margin-top: 25px;
+
+    width: 110.67px;
+    height: 40px;
+
+    background: #FF0000;
+    transition: 0.2s;
+    border-radius: 30px;
+    border: none;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.widget .formulario button:hover{
+    background: #e40808;
+}
+
+#PokeBall{
+    position: absolute;
+    top: -20px;
+    right: -20px;
+
+    transform: rotate(5deg);
+}
+
+#MegaBall {
+    position: absolute;
+    bottom: 30px;
+    left: -30px;
+
+    transform: rotate(-30deg);
+}
+
+#UltraBall {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+
+    transform: rotate(20deg);
+}
+
 </style>

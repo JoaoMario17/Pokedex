@@ -14,6 +14,8 @@
         <button type="submit" >Cadastrar</button>
       </form>
 
+      <span> <span>Já tem uma conta?</span> <br> Faça seu Login: <router-link to="/login"><a>Login</a></router-link></span>
+
       <img id="PokeBall" src="@/assets/images/PokeBall.svg" alt="PokeBall">
       <img id="MegaBall" src="@/assets/images/MegaBall.svg" alt="MegaBall">
       <img id="UltraBall" src="@/assets/images/UltraBall.svg" alt="UltraBall">
@@ -138,6 +140,20 @@ export default{
   .widget .formulario button:hover{
     background: #e40808;
   }
+
+  .widget > span {
+    margin-top: 25px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.widget > span > span {
+    font-weight: 400;
+}
+
+.widget span a {
+    text-decoration: none;
+}
 
   #PokeBall{
     position: absolute;
