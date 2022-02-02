@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../components/screens/TelaLogin.vue'
-import TelaEditarUsuario from '../components/screens/TelaEditarUsuario.vue'
-import TelaPerfil from '../components/screens/TelaPerfil.vue'
-import Cadastro from '../components/screens/TelaCadastroUsuario.vue'
-import Pokemons from '../components/screens/Pokemons.vue'
+import Login from '../pages/TelaLogin.vue'
+import TelaEditarUsuario from '../pages/TelaEditarUsuario.vue'
+import TelaPerfil from '../pages/TelaPerfil.vue'
+import Cadastro from '../pages/TelaCadastroUsuario.vue'
+import Pokemons from '../pages/Pokemons.vue'
 import store from  '@/store'
 
 const routes = [

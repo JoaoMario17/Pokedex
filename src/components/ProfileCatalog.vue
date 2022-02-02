@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Option from './Option.vue'
+import Option from './shared/Option.vue'
 
 export default{
   props: {

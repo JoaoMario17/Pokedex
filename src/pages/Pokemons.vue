@@ -10,7 +10,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import PokemonCard from '../shared/PokemonCard.vue'
+import PokemonCard from '../components/PokemonCard.vue'
 
 export default {
   components: {

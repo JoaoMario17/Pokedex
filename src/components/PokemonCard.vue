@@ -2,8 +2,8 @@
   <div v-if="isFetched" class="back-card-line">
 
     <div @click="fav(pokemon.id)" class="fav-container">
-      <img v-if="isFavPokemon(pokemon.id) || justfavd" src="../../assets/images/StarY.svg">
-      <img v-else src="../../assets/images/StarG.svg">
+      <img v-if="isFavPokemon(pokemon.id) || justfavd" src="../assets/images/StarY.svg">
+      <img v-else src="../assets/images/StarG.svg">
     </div>
 
     <div :class="['card-fill', pokemon.types[0].type.name]">
@@ -15,7 +15,7 @@
             v-for="element in pokemon.types"
             :key="element.slot"
             id="type-icon"
-            :src="require(`../../assets/type-icons/${element.type.name}.svg`)"
+            :src="require(`../assets/type-icons/${element.type.name}.svg`)"
           />
           <h2>{{ pokemon.stats.hp + " HP" }}</h2>
         </div>
