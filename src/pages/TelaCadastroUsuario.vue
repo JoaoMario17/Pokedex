@@ -48,134 +48,88 @@ export default{
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-  * {
+  
+  * 
     font-family: 'Poppins', sans-serif;
     color: black;
-  }
-
-  .container {
-    display: flex;  
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .widget {
-    position: relative;
-
-    margin-top: 25px;
-    width: 538.49px;
-    height: 604px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    
-    background: #FFFFFF;
-    box-shadow: 2px 4px 20px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 6px;
-  }
-
-  .widget h1 {
-    margin-top: 50px;
-
-    width: 360px;
-    height: auto;
-
-    font-size: 26px;
-    line-height: 39px;
-    text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
-  }
-
-  .widget .formulario {
-    margin-top: 50px  ;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .widget .formulario label {
-    margin-left: 12px;
-
-    align-self: flex-start;
-
-    font-size: 18px;
-    line-height: 27px;
-  }
-
-
-  .widget .formulario input{
-    padding: 10px;
-
-    width: 248px;
-    height: 40px;
-
-    border: 0.5px solid #000000;
-    box-sizing: border-box;
-    border-radius: 30px;
-
-    font-weight: 400;
-  }
-
-  .widget .formulario button {
-    margin-top: 25px;
-
-    width: 110.67px;
-    height: 40px;
-
-    background: #FF0000;
-    transition: 0.2s;
-    border-radius: 30px;
-    border: none;
-
-    color: white;
-  }
-
-  .widget .formulario button:hover{
-    background: #e40808;
-  }
-
-  .widget > span {
-    margin-top: 25px;
-    font-weight: 500;
-    text-align: center;
-}
-
-.widget > span > span {
-    font-weight: 400;
-}
-
-.widget span a {
-    text-decoration: none;
-}
-
-  #PokeBall{
-    position: absolute;
-    top: -20px;
-    right: -20px;
-
-    transform: rotate(5deg);
-  }
-
-  #MegaBall {
-    position: absolute;
-    bottom: 30px;
-    left: -30px;
-
-    transform: rotate(-30deg);
-  }
-
-  #UltraBall {
-    position: absolute;
-    bottom: -20px;
-    right: -20px;
-
-    transform: rotate(20deg);
-  }
+    .container 
+      display: flex;  
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    .widget 
+      position: relative;
+      margin-top: 25px;
+      width: 538.49px;
+      height: 604px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: #FFFFFF;
+      box-shadow: 2px 4px 20px 2px rgba(0, 0, 0, 0.25);
+      border-radius: 6px;
+      h1
+        margin-top: 50px;
+        width: 360px;
+        height: auto;
+        font-size: 26px;
+        line-height: 39px;
+        text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
+      .formulario 
+        margin-top: 50px
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        label
+          margin-left: 12px;
+          align-self: flex-start;
+          font-size: 18px;
+          line-height: 27px;
+        input
+          padding: 10px;
+          width: 248px;
+          height: 40px;
+          border: 0.5px solid #000000;
+          box-sizing: border-box;
+          border-radius: 30px;
+          font-weight: 400;
+        button
+          margin-top: 25px;
+          width: 110.67px;
+          height: 40px;
+          background: #FF0000;
+          transition: 0.2s;
+          border-radius: 30px;
+          border: none;
+          color: white;
+          cursor pointer;
+        button:hover
+          background: #e40808;
+      > span
+        margin-top: 25px;
+        font-weight: 500;
+        text-align: center;
+      > span > span 
+          font-weight: 400;
+      > span a 
+          text-decoration: none;
+    #PokeBall
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      transform: rotate(5deg);
+    #MegaBall
+      position: absolute;
+      bottom: 30px;
+      left: -30px;
+      transform: rotate(-30deg);
+    #UltraBall 
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      transform: rotate(20deg);
 </style>

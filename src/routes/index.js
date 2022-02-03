@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../pages/TelaLogin.vue'
-import TelaEditarUsuario from '../pages/TelaEditarUsuario.vue'
 import TelaPerfil from '../pages/TelaPerfil.vue'
 import Cadastro from '../pages/TelaCadastroUsuario.vue'
 import Pokemons from '../pages/Pokemons.vue'
@@ -29,14 +28,6 @@ const routes = [
     component: Cadastro,
     meta: {
       public: true
-    }
-  },
-  {
-    path: '/edit',
-    name: 'Edicao',
-    component: TelaEditarUsuario,
-    meta: {
-      public: false
     }
   },
   {

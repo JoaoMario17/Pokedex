@@ -23,6 +23,9 @@ export default {
     })
     .catch(err => console.log(err))
   },
+  updated(){
+    window.scrollTo(0,0);
+  },
   data(){
     return {
       isFetched: false
@@ -44,23 +47,18 @@ export default {
 <style scoped lang="stylus">
   * 
     color: black;
-  
-  .container
-    display: flex;  
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding-top: 150px;
-  
-  .pokemon-wrapper
-    width: 80%;
-    height: auto;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-    list-style: none;
+    .container
+      display: flex;  
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 150px;
+    .pokemon-wrapper
+      width: 90%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
 </style>
