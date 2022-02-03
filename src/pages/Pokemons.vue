@@ -41,21 +41,19 @@ export default {
 }
 </script>
 
-<style scoped>
-  * {
+<style scoped lang="stylus">
+  * 
     color: black;
-  }
-
-  .container {
+  
+  .container
     display: flex;  
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     padding-top: 150px;
-  }
-
-  .pokemon-wrapper{
+  
+  .pokemon-wrapper
     width: 80%;
     height: auto;
 
@@ -65,5 +63,4 @@ export default {
     justify-content: center;
 
     list-style: none;
-  }
 </style>
