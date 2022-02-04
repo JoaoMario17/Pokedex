@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+		<alert ref="alert"/>
     <div class="widget">
       <img id="login" src="@/assets/images/Login.svg" alt="Login" />
 
@@ -26,11 +27,14 @@
 </template>
 
 <script>
-/* import http from '@/http' */
 import { mapActions } from "vuex";
+import Alert from '../components/Alert.vue'
 
 export default {
   name: "TelaLogin",
+	components: {
+		Alert
+	},
   data() {
     return {
       usuario: {
@@ -46,7 +50,12 @@ export default {
         .then((res) => {
           this.$router.push({ name: "Profile" });
         })
-        .catch((err) => {});
+        .catch((err) => {
+					this.$refs.alert.toggle({	
+						title: "Erro ao realizar Login",
+						description: "Usuário ou senha invalidos",
+						state:"failure"})
+				});
     },
   },
 };

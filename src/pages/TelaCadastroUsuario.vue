@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <alert ref="alert"/>
     <div class="widget">
       <h1>Faça seu cadastro <br> e <br> Embarque nessa aventura</h1>
 
@@ -25,8 +26,12 @@
 
 <script>
 import http from '@/http'
+import Alert from '../components/Alert.vue'
 
 export default{
+  components: {
+		Alert
+	},
   data(){
     return{
       usuario:{
@@ -39,9 +44,17 @@ export default{
   methods: {
     cadastrar(){
       http.post("auth/register",this.usuario)
-        .then(res => console.log(res))
+        .then(res => {
+          this.$refs.alert.toggle({	
+						title: "Cadastro realizado com Sucesso",
+						description: "Va para a página de Login para acessar seu perfil",
+						state:"succes"})
+        })
         .catch(err => {
-          console.log("Erro ao realizar cadastro" + err)
+          this.$refs.alert.toggle({	
+						title: "Erro ao realizar Cadastro",
+						description: "Por favor tente novamente mais tarde",
+						state:"failure"})
         })
     }
   }
