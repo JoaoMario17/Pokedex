@@ -8,12 +8,6 @@
       <div class="user-name">
         <h1>{{this.getUser.nome}}</h1>
       </div>
-      
-
-      <button id="fav-pokemon">
-        <img id="start" src="@/assets/images/StarY.svg" alt="">
-        <h1>Favorite Pokemons</h1>
-      </button>
     </div>
 
     <div v-if="isSeted" class="fav-pokemons">
@@ -114,29 +108,7 @@ export default{
         justify-content: flex-start;
         h1
           color: black;
-          font-size: 20px;
-      #fav-pokemon 
-        margin-top: 50px;
-        width: 280px;
-        height: 50px;
-        display: flex;
-        align-items: center ;
-        justify-content: space-between;
-        background-color: #5A9BC4;
-        border-radius: 4px;
-        box-shadow: 2px 4px 20px 2px rgba(0, 0, 0, 0.25);
-        border: none;
-        #start
-          margin-left: 10px;
-          width: auto;
-          height: 25px;
-        h1 
-          margin-right: 50px;
-          font-size: 18px; 
-      #fav-pokemon:hover 
-        background-color: #407697;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+          font-size: 20px; 
     .fav-pokemons 
       margin-right: 30px;
       margin-left: 460px;
