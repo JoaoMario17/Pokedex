@@ -82,6 +82,7 @@ export default{
 <style scoped lang="stylus">
   .nav-bar 
     width: 100%;
+    height: auto
     position: fixed;
     z-index: 1;
     color: black;
@@ -167,7 +168,7 @@ export default{
         display: grid;
         gap: 2px;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
         z-index: 1;
         button
           width: 38px;
