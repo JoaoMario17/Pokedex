@@ -78,7 +78,7 @@ const actions = {
           reject(err)
         })
       }else if(gen === 8){
-        pokeapi.get("pokemon?limit=121&offset=809")
+        pokeapi.get("pokemon?limit=89&offset=809")
         .then(res => {
           commit('SET_POKEMONS', res.data.results)
           resolve()

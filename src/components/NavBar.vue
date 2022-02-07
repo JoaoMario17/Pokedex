@@ -37,8 +37,6 @@
         <router-link to="/pokemons">
           <img draggable="false" id="pokeball" src="../assets/images/PokeBall.svg" alt="">
         </router-link>
-
-        <a @click="logout" style="margin-right: 10px; cursor: pointer;">LogOut</a>
       </div>
 
     </div>
@@ -64,16 +62,8 @@ export default{
     getgen(gen){
       this.fetchPokemons({gen: gen})
     },
-    logout() {
-      this.CLEAN_TOEKEN()
-      this.$router.push({name: "Index"})
-    }
-    ,
     ...mapActions([
       'fetchPokemons',
-    ]),
-    ...mapMutations([
-      'CLEAN_TOEKEN'
     ])
   }
 }

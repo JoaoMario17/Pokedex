@@ -1,16 +1,30 @@
 <template>
   <div class="container">
     <div class="side-bar">
+
+      <img id="profile-holder" src="@/assets/images/Profile_space.svg" alt="profile_space">
+
       <div class="user-img">
-        <img src="@/assets/images/moldura_pokedex.png" alt="">
+        <img id="frame" src="@/assets/images/moldura_pokedex.png" alt="">
       </div>
 
       <div class="user-name">
         <h1>{{this.getUser.nome}}</h1>
       </div>
+
+      <div @click="logout" class="logout">
+        <img id="logouticon" src="@/assets/images/LogoutIcon.svg" alt="LogOut">
+        <h1>LogOut</h1>
+      </div>
+      
     </div>
 
     <div v-if="isSeted" class="fav-pokemons">
+      <div class="title" > 
+        <span>Fav Pokemons</span>  
+        <img src="@/assets/images/StarY.svg" alt="">
+      </div>
+
       <ul>
         <li v-for="(pokemon, index) in getPokemons" :key="index">
           <pokemon-card :pokemon_index="index" :url="pokemon.url"/>
@@ -21,7 +35,7 @@
 </template>
 
 <script>
-import { mapActions,mapGetters } from 'vuex'
+import { mapActions,mapGetters,mapMutations } from 'vuex'
 import PokemonCard from '../components/PokemonCard.vue'
 
 export default{
@@ -52,7 +66,14 @@ export default{
     ...mapActions([
       'fetchUserData',
       'setPokemonsById'
-    ])
+    ]),
+    ...mapMutations([
+      'CLEAN_TOEKEN'
+    ]),
+    logout() {
+      this.CLEAN_TOEKEN()
+      this.$router.push({name: "Index"})
+    }
   },
   computed: {
     ...mapGetters([
@@ -66,6 +87,9 @@ export default{
 </script>
 
 <style scoped lang="stylus">
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
   .container 
     display: flex;
     flex-direction: column;
@@ -85,36 +109,80 @@ export default{
       width: 400px;
       height: 100vh;
       background-color: #E7E7E7;
-      box-shadow: 2px 4px 20px 2px rgba(0, 0, 0, 0.25);
+      border: solid 5px black;
+      #profile-holder
+        position: fixed;
+        top: 110px;
+        width: auto;
+        height: 500px;
+        z-index: -1;  
       .user-img 
         position: relative;
-        margin-top: 50px;
-        width: 300px;
-        height: 240px;
+        top: 200px;
+        width: 230px;
+        height: 155px;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
-        background-color: white;
-        border-radius: 6px;
-        box-shadow: 2px 4px 20px 2px rgba(0, 0, 0, 0.25);
-        position: absolute;
+        justify-content: center;
+        background-image: url("@/assets/images/profile_holders/Picachu.png");
+        #frame
+          width: auto;
+          height: 200px;      
       .user-name 
-        margin-top: 310px;
-        width: 260px;
-        height: 50px;
+        position: relative;
+        box-sizing: border-box;
+        padding: 8px
+        top: 250px;
+        left: -16px
+        width: 130px;
+        height: 85px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
         h1
-          color: black;
-          font-size: 20px; 
+          color: white;
+          font-family: 'Press Start 2P', cursive;
+          font-size: 13px; 
+          line-height: 20px;
+      .logout
+          cursor: pointer;
+          position: absolute;
+          bottom: 80px;
+          left: 25px
+          width: 80px
+          display: flex
+          justify-content: space-between  
+          #logouticon
+            width: auto;
+            height: 17px
+          h1
+            color: black
     .fav-pokemons 
       margin-right: 30px;
       margin-left: 460px;
       width: 60vw;
       height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .title
+        color: white
+        background-color: #5A9BC4;
+        width: 250px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 20px;
+        border: solid 2px  #155177;
+        span
+          font-family: 'Poppins', sans-serif;
+          font-size: 20px;
+          margin-left: 20px;
+        img 
+          margin-left: -10px;
       ul 
+        margin-top: 30px;
         width: 100%;
         height: auto;
         display: flex;
