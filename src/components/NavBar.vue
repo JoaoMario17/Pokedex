@@ -44,10 +44,13 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default{
   computed: {
+    ...mapGetters([
+      'getPokemons'
+    ]),
     currentRouteName() {
       return this.$route.name;
     },

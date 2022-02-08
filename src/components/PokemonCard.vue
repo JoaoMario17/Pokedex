@@ -67,24 +67,15 @@ export default {
     url: {
       type: String,
       required: true,
-    },
-    pokemon_index: {
-      type: Number,
-      required: true,
-    },
+    }
   },
   created() {
-    this.fetchPokemonData({
-      index: this.$props.pokemon_index,
-      url: this.$props.url,
-    })
+    http.get(this.$props.url)
       .then((res) => {
         this.pokemon.name = res.data.name;
         this.pokemon.id = res.data.id;
-
         this.pokemon.type = res.data.types[0].type.name;
         this.pokemon.types = res.data.types;
-
         this.pokemon.img = res.data.sprites.front_default;
         this.pokemon.stats.hp = res.data.stats[0].base_stat;
         this.pokemon.stats.attack = res.data.stats[1].base_stat;
@@ -122,32 +113,35 @@ export default {
   computed: {
     ...mapGetters([
       "getPokemonTypes",
-      'getFavPokemons'
-      ])
+      'getFavPokemonsIds'
+    ])
   },
   methods: {
     ...mapActions(["fetchPokemonData"]),
     ...mapMutations([
-        'REMOVE_FAV_POKEMON',
-        'ADD_FAV_POKEMON'
-        ]),
-
+      'REMOVE_FAV_POKEMON',
+      'ADD_FAV_POKEMON'
+    ]),
     pokemonNameUpperCase(name) {
       return name.charAt(0).toUpperCase() + name.slice(1);
     },
     async fav(id) {
       if(!this.isFavPokemon(id)){
-        await http.put('/favpokemon/add',{id: id},{headers: {"Authorization" : `Bearer ${this.$store.state.token}`}})
-        this.ADD_FAV_POKEMON(id)
-        this.justfavd = true
+        http.put('/favpokemon/add',{id: id},{headers: {"Authorization" : `Bearer ${this.$store.state.token}`}})
+        .then(() => {
+          this.ADD_FAV_POKEMON(id)
+          this.justfavd = true
+        }) 
       }else {
         await http.put('/favpokemon/remove',{id: id},{headers: {"Authorization" : `Bearer ${this.$store.state.token}`}})
-        this.REMOVE_FAV_POKEMON(id)
-        this.justfavd = false
+        .then(() => {
+          this.REMOVE_FAV_POKEMON(id)
+          this.justfavd = false
+        })
       }
     },
     isFavPokemon(id){
-      return this.getFavPokemons.includes(id)
+      return this.getFavPokemonsIds.includes(id)
     }
   },
 };

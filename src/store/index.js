@@ -6,7 +6,9 @@ import getters from './getters'
 const store = createStore({
   state: {
     token:'',
-    pokemons: [],
+    pokemons_urls: [],
+    favpokemons_url: [],
+    favpokemons_data: [],
     usuario: {}
   },
   mutations,

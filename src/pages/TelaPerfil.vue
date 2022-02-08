@@ -26,8 +26,8 @@
       </div>
 
       <ul>
-        <li v-for="(pokemon, index) in getPokemons" :key="index">
-          <pokemon-card :pokemon_index="index" :url="pokemon.url"/>
+        <li v-for="(pokemon, index) in QuickSortedPokemons" :key="index">
+          <pokemon-card :url="pokemon.url"/>
         </li>
       </ul>
     </div>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import QuickSort from '@/algorithms/QuickSort.js'
 import { mapActions,mapGetters,mapMutations } from 'vuex'
 import PokemonCard from '../components/PokemonCard.vue'
 
@@ -48,7 +49,7 @@ export default{
       //Limpar array de pokemons
       this.$store.state.pokemons = []
       //Definir urls dos pokemons favoritados 
-      this.setPokemonsById({pokearray: this.getFavPokemons})
+      this.SetFavoritePokemonsUrls({pokearray: this.getFavPokemonsIds})
       this.isSeted = true
     })
     .catch(err => console.log(err))
@@ -65,7 +66,7 @@ export default{
   methods: {
     ...mapActions([
       'fetchUserData',
-      'setPokemonsById'
+      'SetFavoritePokemonsUrls'
     ]),
     ...mapMutations([
       'CLEAN_TOEKEN'
@@ -78,9 +79,18 @@ export default{
   computed: {
     ...mapGetters([
       'getUser',
-      'getFavPokemons',
-      'getPokemons'
-    ])
+      'getFavPokemonsIds',
+      'getPokemons',
+      'getFavPokemons'
+    ]),
+    QuickSortedPokemons(){
+      var array = [];
+      //Convertendo a Proxy para um array de Proxys
+      this.getFavPokemons.forEach(pokemon => {
+        array.push(pokemon)
+      })
+      return QuickSort(array,0,array.length-1)
+    }
   }
 }
 

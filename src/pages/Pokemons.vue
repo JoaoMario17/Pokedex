@@ -1,8 +1,8 @@
 <template>
   <div class="container">
       <ul v-if="isFetched" class="pokemon-wrapper">
-        <li v-for="(pokemon,index) in getPokemons" :key="pokemon.name">
-          <pokemon-card :pokemon_index="index" :url="pokemon.url"/>
+        <li v-for="pokemon in getPokemons" :key="pokemon.name">
+          <pokemon-card :url="pokemon.url"/>
         </li>
       </ul>
   </div>
@@ -15,6 +15,11 @@ import PokemonCard from '../components/PokemonCard.vue'
 export default {
   components: {
     'pokemon-card': PokemonCard
+  },
+  data(){
+    return{
+      urls: []
+    }
   },
   created(){
     this.fetchPokemons({gen:'all'})

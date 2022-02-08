@@ -2,14 +2,14 @@ const mutations = {
   SET_TOKEN(state,{token}){
     state.token = token
   },
-  SET_POKEMONS(state,pokemons){
-    state.pokemons = pokemons
+  CLEAN_POKEMONS_URL(state){
+    state.pokemons_urls = []
   },
-  SET_POKEMON_DATA(state,{index,pokemonD}){
-    state.pokemons[index].name = pokemonD.name
-    state.pokemons[index].types = pokemonD.types
-    state.pokemons[index].stats = pokemonD.stats
-    state.pokemons[index].stats = pokemonD.id
+  SET_POKEMONS_URL(state,pokemons){
+    state.pokemons_urls = pokemons
+  },
+  SET_FAVPOKEMONS_URL(state,pokemons){
+    state.favpokemons_url = pokemons
   },
   SET_USER_DATA(state,{user}){
     state.usuario.id = user.id
