@@ -14,8 +14,8 @@ export default {
 }
 </script>
 
-<style>
-  * {
+<style lang="stylus">
+  * 
     margin: 0;
     padding: 0;
 
@@ -28,5 +28,7 @@ export default {
     font-size: 15px;
     font-weight: bold;
     color: var(--branco);
-  }
+    .container
+      width: 100vw
+      height: 100vh
 </style>

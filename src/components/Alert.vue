@@ -42,7 +42,7 @@ export default {
     bottom: 20px
     left: 20px
     width: 320px
-    height: 50px
+    height: auto
     border-radius: 5px
     border: 1px solid black
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;    

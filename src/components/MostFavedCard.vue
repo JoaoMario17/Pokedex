@@ -1,13 +1,8 @@
 <template>
   <div v-if="isFetched" class="back-card-line">
 
-    <div @click="fav(pokemon.id)" class="fav-container">
-      <img v-if="isFavPokemon(pokemon.id) || justfavd" src="../assets/images/StarY.svg">
-      <img v-else src="../assets/images/StarG.svg">
-    </div>
-
     <div :class="['card-fill', pokemon.types[0].type.name]">
-      <div class="name-n-power d-flex algin-items-center">
+      <div class="name-n-power">
         <h1 class="fs-6 mt-2">{{ pokemonNameUpperCase(pokemon.name) }}</h1>
         <div class="powers d-flex align-items-center">
           <img
@@ -51,16 +46,13 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    <div class="loader-card">
-      <div class="c-loader"></div>
-    </div> 
+  <div v-else class="loader-card">
+    <div class="c-loader"></div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
-import http from '@/http'
+import pokeapi from '@/http/pokeapi'
 
 export default {
   props: {
@@ -69,30 +61,34 @@ export default {
       required: true,
     }
   },
-  created() {
-    http.get(this.$props.url)
-      .then((res) => {
-        this.pokemon.name = res.data.name;
-        this.pokemon.id = res.data.id;
-        this.pokemon.type = res.data.types[0].type.name;
-        this.pokemon.types = res.data.types;
-        this.pokemon.img = res.data.sprites.front_default;
-        this.pokemon.stats.hp = res.data.stats[0].base_stat;
-        this.pokemon.stats.attack = res.data.stats[1].base_stat;
-        this.pokemon.stats.defense = res.data.stats[2].base_stat;
-        this.pokemon.stats.special_attack = res.data.stats[3].base_stat;
-        this.pokemon.stats.special_defense = res.data.stats[4].base_stat;
-        this.pokemon.stats.speed = res.data.stats[5].base_stat;
+  watch: {
+    url(){
+      if(this.url !== 'null') {
+        pokeapi.get(this.url)
+        .then((res) => {
+          this.pokemon.name = res.data.name;
+          this.pokemon.id = res.data.id;
+          this.pokemon.type = res.data.types[0].type.name;
+          this.pokemon.types = res.data.types;
+          this.pokemon.img = res.data.sprites.front_default;
+          this.pokemon.stats.hp = res.data.stats[0].base_stat;
+          this.pokemon.stats.attack = res.data.stats[1].base_stat;
+          this.pokemon.stats.defense = res.data.stats[2].base_stat;
+          this.pokemon.stats.special_attack = res.data.stats[3].base_stat;
+          this.pokemon.stats.special_defense = res.data.stats[4].base_stat;
+          this.pokemon.stats.speed = res.data.stats[5].base_stat;
 
-        this.isFetched = true;
-      })
-      .catch((err) => console.log(err));
+          this.isFetched = true;
+        })
+        .catch((err) => console.log(err));
+      } else {
+        this.isFetched = false;
+      }
+    }
   },
   data() {
     return {
       isFetched: false,
-      justfavd: false,
-
       pokemon: {
         img: "",
         name: "",
@@ -110,44 +106,15 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters([
-      "getPokemonTypes",
-      'getFavPokemonsIds'
-    ])
-  },
   methods: {
-    ...mapActions(["fetchPokemonData"]),
-    ...mapMutations([
-      'REMOVE_FAV_POKEMON',
-      'ADD_FAV_POKEMON'
-    ]),
     pokemonNameUpperCase(name) {
       return name.charAt(0).toUpperCase() + name.slice(1);
     },
-    async fav(id) {
-      if(!this.isFavPokemon(id)){
-        http.put('/favpokemon/add',{id: id},{headers: {"Authorization" : `Bearer ${this.$store.state.token}`}})
-        .then(() => {
-          this.ADD_FAV_POKEMON(id)
-          this.justfavd = true
-        }) 
-      }else {
-        await http.put('/favpokemon/remove',{id: id},{headers: {"Authorization" : `Bearer ${this.$store.state.token}`}})
-        .then(() => {
-          this.REMOVE_FAV_POKEMON(id)
-          this.justfavd = false
-        })
-      }
-    },
-    isFavPokemon(id){
-      return this.getFavPokemonsIds.includes(id)
-    }
-  },
-};
+  }
+}
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang='stylus'>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
 * 
@@ -168,7 +135,7 @@ export default {
     border: 1.5px solid #000000;
     .fav-container 
       position: absolute;
-      top: -29px;
+      top: -31px;
       left: 2px;
       display: flex;
       align-items: center;
@@ -209,6 +176,9 @@ export default {
           flex-direction: row-reverse;
           align-items: center;
           justify-content: flex-start;
+          h2 
+            margin-right: 5px;
+            font-size: 12px;
           #type-icon 
             margin-left: 2px;
             margin-right: 2px;

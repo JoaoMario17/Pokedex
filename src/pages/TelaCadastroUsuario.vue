@@ -6,13 +6,17 @@
 
       <form @submit.prevent="cadastrar" class="formulario">
         <label for="">Nome</label>
-        <input v-model="usuario.nome" type="text">
+        <input v-model="usuario.name" type="text">
         <label for="">E-mail</label>
         <input v-model="usuario.email" type="email">
         <label for="">Senha</label>
-        <input v-model="usuario.senha" type="password">
+        <input v-model="usuario.password" type="password">
+        <div class="checkbox">
+          <span>Usuário administrador</span>
+          <input type="checkbox" v-model="usuario.adminUser">
+        </div>
 
-        <button type="submit" >Cadastrar</button>
+        <button type="submit">Cadastrar</button>
       </form>
 
       <span> <span>Já tem uma conta?</span> <br> Faça seu Login: <router-link to="/login"><a>Login</a></router-link></span>
@@ -35,15 +39,17 @@ export default{
   data(){
     return{
       usuario:{
-        nome:'',
+        name:'',
         email:'',
-        senha:''
+        password:'',
+        adminUser: false,
       }
     }
   },
   methods: {
-    cadastrar(){
-      http.post("auth/register",this.usuario)
+    cadastrar(){ 
+      console.log(this.usuario);
+      http.post("/auth/register",this.usuario)
         .then(res => {
           this.$refs.alert.toggle({	
 						title: "Cadastro realizado com Sucesso",
@@ -51,6 +57,7 @@ export default{
 						state:"succes"})
         })
         .catch(err => {
+          console.log(err.response);
           this.$refs.alert.toggle({	
 						title: "Erro ao realizar Cadastro",
 						description: "Por favor tente novamente mais tarde",
@@ -92,7 +99,7 @@ export default{
         line-height: 39px;
         text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.25);
       .formulario 
-        margin-top: 50px
+        margin-top: 25px
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -111,7 +118,7 @@ export default{
           border-radius: 30px;
           font-weight: 400;
         button
-          margin-top: 25px;
+          margin-top: 15px;
           width: 110.67px;
           height: 40px;
           background: #FF0000;
@@ -122,6 +129,15 @@ export default{
           cursor pointer;
         button:hover
           background: #e40808;
+        .checkbox 
+          width: 250px
+          margin-top: 10px
+          display: flex
+          align-items: center
+          justify-content: center
+          > input 
+            margin-left: 20px
+            width: 20px
       > span
         margin-top: 25px;
         font-weight: 500;

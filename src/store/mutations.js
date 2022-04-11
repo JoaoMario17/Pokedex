@@ -12,10 +12,15 @@ const mutations = {
     state.favpokemons_url = pokemons
   },
   SET_USER_DATA(state,{user}){
-    state.usuario.id = user.id
-    state.usuario.nome = user.nome
+    state.usuario.uuid = user.uuid
+    state.usuario.nome = user.name
     state.usuario.email = user.email
-    state.usuario.favpokemons = user.favpokemons
+    state.usuario.user_role = user.user_role;
+    if(!user.favpokemons) {
+      state.usuario.favpokemons = [];
+    } else {
+      state.usuario.favpokemons = user.favpokemons
+    }
   },
   CLEAN_TOEKEN(state) {
     state.token = null;

@@ -16,13 +16,8 @@ export default {
   components: {
     'pokemon-card': PokemonCard
   },
-  data(){
-    return{
-      urls: []
-    }
-  },
   created(){
-    this.fetchPokemons({gen:'all'})
+    this.fetchPokemons({gen:1})
     .then(()=>{
       this.isFetched = true
     })
@@ -53,11 +48,12 @@ export default {
   * 
     color: black;
     .container
+      height: auto
       display: flex;  
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 150px;
+      padding-top: 150px
     .pokemon-wrapper
       width: 90%;
       height: auto;

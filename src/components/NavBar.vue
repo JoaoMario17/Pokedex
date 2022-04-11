@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-else class="normal-navbar">
+    <div v-else-if="!navType && userRole === 'basic'" class="normal-navbar">
       <div class="nav-bar-p1-l"></div>
       <div class="nav-bar-p1">
         <router-link to="/pokemons">
@@ -39,6 +39,15 @@
         </router-link>
       </div>
 
+      <span>{{userRole}}</span>
+    </div>
+
+    <div v-else class="normal-navbar">
+      <div class="nav-bar-p1-l"></div>
+      <div class="nav-bar-p1">
+      </div>
+
+      <span>{{userRole}}</span>
     </div>
   </div>
 </template>
@@ -49,7 +58,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default{
   computed: {
     ...mapGetters([
-      'getPokemons'
+      'getUser'
     ]),
     currentRouteName() {
       return this.$route.name;
@@ -60,6 +69,9 @@ export default{
     navType(){
       if(this.currentRouteName == 'Pokemons') return true
       else return false
+    },
+    userRole() {
+      return this.getUser.user_role
     }
   },methods: {
     getgen(gen){
@@ -71,8 +83,9 @@ export default{
   }
 }
 </script>
-
 <style scoped lang="stylus">
+  red = #E4000F
+
   .nav-bar 
     width: 100%;
     height: auto
@@ -122,7 +135,7 @@ export default{
       padding: 0;
       width: 100%;
       height: 70px;
-      background-color: #d23b2d;
+      background-color: red;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       #pokeball 
         margin-left: 20px;
@@ -132,7 +145,7 @@ export default{
       position: absolute;
       top: 0px;
       left: 0px;
-      background-color: #d23b2d;
+      background-color: red;
       margin: 0;
       padding: 0;
       width: 300px;
@@ -187,7 +200,7 @@ export default{
       top: -88px;
       left: 201px;
       transform: rotate(134deg);
-      background-color: #d23b2d;
+      background-color: red;
       margin: 0;
       padding: 0;
       width: 300px;

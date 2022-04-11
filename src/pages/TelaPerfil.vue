@@ -2,10 +2,19 @@
   <div class="container">
     <div class="side-bar">
 
-      <img id="profile-holder" src="@/assets/images/Profile_space.svg" alt="profile_space">
+      <img id="profile-holder" src="@/assets/images/Profile_space.png" alt="profile_space">
 
-      <div class="user-img">
+      <div class="user-img d-flex">
         <img id="frame" src="@/assets/images/moldura_pokedex.png" alt="">
+      </div>
+
+      <div class="actions">
+        <button id="delete-btn" @click="deleteUser">
+          <img id="frame" src="@/assets/images/trash-can.svg" alt="">
+        </button>
+        <button id="edit-btn">
+          <img id="frame" src="@/assets/images/edit.svg" alt="">
+        </button>
       </div>
 
       <div class="user-name">
@@ -14,7 +23,7 @@
 
       <div @click="logout" class="logout">
         <img id="logouticon" src="@/assets/images/LogoutIcon.svg" alt="LogOut">
-        <h1>LogOut</h1>
+        <h1 class="fs-6">LogOut</h1>
       </div>
       
     </div>
@@ -31,6 +40,10 @@
         </li>
       </ul>
     </div>
+
+    <delete-user-modal 
+      ref="deleteUserModal"
+    />
   </div>
 </template>
 
@@ -38,10 +51,12 @@
 import QuickSort from '@/algorithms/QuickSort.js'
 import { mapActions,mapGetters,mapMutations } from 'vuex'
 import PokemonCard from '../components/PokemonCard.vue'
+import DeleteModal from '../components/modal/DeleteUserModal.vue'
 
 export default{
  components: {
-    'pokemon-card': PokemonCard
+    'pokemon-card': PokemonCard,
+    'delete-user-modal': DeleteModal,
   },
   created(){
     this.fetchUserData()
@@ -66,7 +81,8 @@ export default{
   methods: {
     ...mapActions([
       'fetchUserData',
-      'SetFavoritePokemonsUrls'
+      'SetFavoritePokemonsUrls',
+      'deleteUser'
     ]),
     ...mapMutations([
       'CLEAN_TOEKEN'
@@ -74,6 +90,9 @@ export default{
     logout() {
       this.CLEAN_TOEKEN()
       this.$router.push({name: "Index"})
+    },
+    deleteUser() {
+      this.$refs.deleteUserModal.open()
     }
   },
   computed: {
@@ -85,11 +104,15 @@ export default{
     ]),
     QuickSortedPokemons(){
       var array = [];
-      //Convertendo a Proxy para um array de Proxys
-      this.getFavPokemons.forEach(pokemon => {
-        array.push(pokemon)
-      })
-      return QuickSort(array,0,array.length-1)
+
+      if(this.getFavPokemons) {
+        this.getFavPokemons.forEach(pokemon => {
+          array.push(pokemon)
+        })
+
+        return QuickSort(array,0,array.length-1);
+      }
+      return null;
     }
   }
 }
@@ -101,6 +124,7 @@ export default{
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
   .container 
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -131,18 +155,45 @@ export default{
         top: 200px;
         width: 230px;
         height: 155px;
-        display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url("@/assets/images/profile_holders/Picachu.png");
+        background-image: url("@/assets/images/profile_holders/Squirtle.png");
         #frame
           width: auto;
-          height: 200px;      
+          height: 200px;  
+      .actions
+        display: flex
+        align-items: center
+        justify-content: center
+        position: relative;
+        top: 225px;
+        width: 230px; 
+        #edit-btn
+          cursor: pointer
+          display: flex
+          align-items: center
+          justify-content: center
+          background: #0000FF;
+          border: 2px solid #000000;
+          box-sizing: border-box;
+          border-radius: 10px;
+          padding: 4px
+        #delete-btn
+          cursor: pointer
+          display: flex
+          align-items: center
+          justify-content: center
+          background: #FF0000;
+          border: 2px solid #000000;
+          box-sizing: border-box;
+          border-radius: 10px;
+          padding: 4px
+          margin-right: 10px  
       .user-name 
         position: relative;
         box-sizing: border-box;
         padding: 8px
-        top: 250px;
+        top: 235px;
         left: -16px
         width: 130px;
         height: 85px;
@@ -157,7 +208,7 @@ export default{
       .logout
           cursor: pointer;
           position: absolute;
-          bottom: 80px;
+          bottom: 60px;
           left: 25px
           width: 80px
           display: flex
@@ -169,8 +220,8 @@ export default{
             color: black
     .fav-pokemons 
       margin-right: 30px;
-      margin-left: 460px;
-      width: 60vw;
+      margin-left: 100px;
+      width: 80vw;
       height: auto;
       display: flex;
       flex-direction: column;

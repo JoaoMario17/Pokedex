@@ -3,6 +3,7 @@ import Login from '../pages/TelaLogin.vue'
 import TelaPerfil from '../pages/TelaPerfil.vue'
 import Cadastro from '../pages/TelaCadastroUsuario.vue'
 import Pokemons from '../pages/Pokemons.vue'
+import Admin from '../pages/TelaAdmin.vue'
 import store from  '@/store'
 
 const routes = [
@@ -36,7 +37,15 @@ const routes = [
     component: Pokemons,
     meta: {
       public: false
-    }
+    },
+  },
+  {
+    path: '/admin',
+    name: 'Administrador',
+    component: Admin,
+    meta: {
+      public: false
+    },
   }
 ]
   

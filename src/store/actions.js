@@ -1,4 +1,3 @@
-import axios from 'axios'
 import http from '@/http'
 import pokeapi from '@/http/pokeapi'
 
@@ -101,15 +100,17 @@ const actions = {
   SetFavoritePokemonsUrls({commit},{pokearray}){
     var pokemons_buffer = []
 
-    pokearray.forEach((id,i) => {
+    if(pokearray) {
+      pokearray.forEach((id,i) => {
       
-      var pokemon_transfer_obj = {
-        url: `https://pokeapi.co/api/v2/pokemon/${id}/`,
-        id: id
-      }
-
-      pokemons_buffer[i] = pokemon_transfer_obj
-    })
+        var pokemon_transfer_obj = {
+          url: `https://pokeapi.co/api/v2/pokemon/${id}/`,
+          id: id
+        }
+  
+        pokemons_buffer[i] = pokemon_transfer_obj
+      })
+    }
 
     commit('SET_FAVPOKEMONS_URL',pokemons_buffer)
   },
@@ -130,14 +131,53 @@ const actions = {
 
   fetchUserData({commit,state}){
     return new Promise((resolve,reject) => {
-      http.get('userdata',{headers: {"Authorization" : `Bearer ${state.token}`}})
+      http.get(`userdata/${state.usuario.uuid}`,{headers: {"Authorization" : `Bearer ${state.token}`}})
       .then(res => {
-        commit('SET_USER_DATA',{user: res.data.usuario})
+        commit('SET_USER_DATA',{user: res.data.user})
         resolve()
       })
       .catch(err => {
-        console.log(err)
         reject(err)
+      })
+    })
+  },
+
+  deleteUser({state}) {
+    return new Promise((resolve, reject) => {
+      console.log(state.usuario.uuid);
+      http.delete('userdelete', {
+        headers: {"Authorization" : `Bearer ${state.token}`},
+        data: { uuid: state.usuario.uuid }
+      })
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      })
+    })
+  },
+
+  fetchUsersCount({state}) {
+    return new Promise((resolve, reject) => {
+      http.get('userscount', {headers: {"Authorization" : `Bearer ${state.token}`}})
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+    });
+  },
+
+  fetchMostFavedPokemon({state}) {
+    return new Promise((resolve, reject) => {
+      http.get('mostfaved', {headers: {"Authorization" : `Bearer ${state.token}`}})
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
       })
     })
   }
